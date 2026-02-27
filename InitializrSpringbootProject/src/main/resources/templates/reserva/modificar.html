@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reserva</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Reserva</h1>
+
+<form th:action="@{/reserva/guardar}" th:object="${reserva}" method="post">
+
+    <input type="hidden" th:field="*{idReserva}" />
+
+    <label>Fecha:</label>
+    <input type="date" th:field="*{fechaReserva}" required />
+    
+    <br><br>
+
+    <label>Nombre Cliente:</label>
+    <input type="text" th:field="*{nombreCliente}" required />
+    
+    <br><br>
+
+    <label>Servicio:</label>
+    <select th:field="*{servicio}" required>
+        <option th:each="serv : ${servicios}"
+                th:value="${serv.idServicio}"
+                th:text="${serv.nombreServicio}">
+        </option>
+    </select>
+
+    <br><br>
+    <button type="submit">Guardar</button>
+</form>
+
+<br>
+<a th:href="@{/reserva/listado}">Volver</a>
+
+</body>
+</html>
